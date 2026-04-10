@@ -1,4 +1,4 @@
-# BRIDGES TERMINAL
+# TASK TERMINAL
 
 > Death Stranding-inspired in-game order management overlay
 
