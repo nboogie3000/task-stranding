@@ -1,0 +1,55 @@
+{
+  "games": ["Death Stranding 2", "Resident Evil 2"],
+  "tasks": [
+    {
+      "id": 1,
+      "name": "Gather ceramics ×200",
+      "game": "Death Stranding 2",
+      "pri": "high",
+      "cat": "Resources",
+      "notes": "Needed for zipline upgrade in central region.",
+      "done": false,
+      "order": 0
+    },
+    {
+      "id": 2,
+      "name": "Raise order rating on Episode 3 deliveries",
+      "game": "Death Stranding 2",
+      "pri": "med",
+      "cat": "Side mission",
+      "notes": "5-star rating unlocks the power skeleton",
+      "done": false,
+      "order": 1
+    },
+    {
+      "id": 3,
+      "name": "Complete Mama relocation order",
+      "game": "Death Stranding 2",
+      "pri": "high",
+      "cat": "Story",
+      "notes": "",
+      "done": false,
+      "order": 2
+    },
+    {
+      "id": 4,
+      "name": "Upgrade speed skeleton to Lv.2",
+      "game": "Death Stranding 2",
+      "pri": "low",
+      "cat": "Upgrade/Items/Weapons",
+      "notes": "Requires special alloys",
+      "done": false,
+      "order": 3
+    },
+    {
+      "id": 5,
+      "name": "Reach Mountaintop area — memory stone",
+      "game": "Resident Evil 2",
+      "pri": "med",
+      "cat": "Exploration",
+      "notes": "Use waygate at consecrated snowfield",
+      "done": true,
+      "order": 4
+    }
+  ]
+}
