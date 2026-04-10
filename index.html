@@ -1,0 +1,1273 @@
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+    :root {
+        --ds-bg: #0a0c0f;
+        --ds-panel: #0f1318;
+        --ds-border: #2a3a4a;
+        --ds-accent: #c8860a;
+        --ds-accent2: #e8a020;
+        --ds-text: #c8dce8;
+        --ds-text-bright: #eef4f8;
+        --ds-text-dim: #c8dce8;
+        --ds-high: #c84040;
+        --ds-med: #c8860a;
+        --ds-low: #2a7a4a;
+        --ds-mono: 'Share Tech Mono', monospace;
+        --ds-silver: #b8c8d8;
+        --ds-silver2: #d8e8f0;
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body,
+    .root {
+        background: var(--ds-bg);
+        font-family: var(--ds-mono);
+        color: var(--ds-text);
+        min-height: 520px;
+    }
+
+    .header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px 16px 8px;
+        border-bottom: 1px solid var(--ds-border);
+        background: var(--ds-panel);
+    }
+
+    .header-left {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .logo-mark {
+        width: 22px;
+        height: 22px;
+        border: 1.5px solid var(--ds-accent);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-inner {
+        width: 8px;
+        height: 8px;
+        border: 1.5px solid var(--ds-accent);
+        border-radius: 50%;
+    }
+
+    .title-group {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+    }
+
+    .title-main {
+        font-size: 17px;
+        letter-spacing: 3px;
+        color: var(--ds-accent2);
+        text-transform: uppercase;
+    }
+
+    .title-sub {
+        font-size: 14px;
+        letter-spacing: 2px;
+        color: var(--ds-text-dim);
+    }
+
+    .header-right {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .stat-pill {
+        font-size: 9px;
+        letter-spacing: 1px;
+        color: var(--ds-text-dim);
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .stat-pill span {
+        color: var(--ds-text-bright);
+        font-size: 11px;
+    }
+
+    .add-btn {
+        background: none;
+        border: 1px solid var(--ds-accent);
+        color: var(--ds-accent);
+        font-family: var(--ds-mono);
+        font-size: 10px;
+        letter-spacing: 2px;
+        padding: 4px 10px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.15s;
+    }
+
+    .add-btn:hover {
+        background: rgba(200, 134, 10, 0.15);
+        color: var(--ds-accent2);
+    }
+
+    .tab-bar {
+        display: flex;
+        border-bottom: 1px solid var(--ds-border);
+        background: var(--ds-panel);
+        padding: 0 16px;
+    }
+
+    .tab {
+        font-size: 12px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        padding: 7px 14px;
+        cursor: pointer;
+        color: var(--ds-text-dim);
+        border-bottom: 2px solid transparent;
+        transition: all 0.15s;
+        background: none;
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        font-family: var(--ds-mono);
+    }
+
+    .tab.active {
+        color: var(--ds-accent2);
+        border-bottom-color: var(--ds-accent);
+    }
+
+    .tab:hover:not(.active) {
+        color: var(--ds-text);
+    }
+
+    .filter-bar {
+        display: flex;
+        gap: 6px;
+        padding: 7px 14px;
+        border-bottom: 1px solid var(--ds-border);
+        background: var(--ds-panel);
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .filter-chip {
+        font-size: 8px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 3px 8px;
+        border: 1px solid var(--ds-border);
+        cursor: pointer;
+        color: var(--ds-text-dim);
+        background: none;
+        font-family: var(--ds-mono);
+        transition: all 0.15s;
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    .filter-chip.active {
+        border-color: var(--ds-accent);
+        color: var(--ds-accent2);
+        background: rgba(200, 134, 10, 0.1);
+    }
+
+    .filter-chip:hover:not(.active) {
+        color: var(--ds-text);
+        border-color: #4a6070;
+    }
+
+    .chip-del {
+        display: none;
+        width: 12px;
+        height: 12px;
+        align-items: center;
+        justify-content: center;
+        color: var(--ds-high);
+        font-size: 13px;
+        line-height: 1;
+        cursor: pointer;
+        margin-left: 2px;
+    }
+
+    .filter-chip.removable:hover .chip-del {
+        display: flex;
+    }
+
+    .filter-chip.removable:hover .chip-text {
+        opacity: 0.7;
+    }
+
+    .add-game-btn {
+        background: none;
+        border: 1px dashed var(--ds-border);
+        color: var(--ds-text-dim);
+        font-family: var(--ds-mono);
+        font-size: 8px;
+        letter-spacing: 1.5px;
+        padding: 3px 8px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.15s;
+    }
+
+    .add-game-btn:hover {
+        border-color: var(--ds-accent);
+        color: var(--ds-accent2);
+    }
+
+    .body {
+        padding: 10px 14px;
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+        min-height: 340px;
+    }
+
+    .section-label {
+        font-size: 12px;
+        letter-spacing: 3px;
+        color: var(--ds-text-dim);
+        text-transform: uppercase;
+        padding: 4px 0 2px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        user-select: none;
+    }
+
+    .section-label::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: var(--ds-border);
+    }
+
+    .task-row {
+        display: grid;
+        /* Updated grid: removed 18px logo slot, ensured enough 'auto' columns for badge/pri/del */
+        grid-template-columns: 18px 1fr auto auto auto;
+        align-items: start;
+        gap: 12px;
+        padding: 8px 12px;
+        border: 1px solid var(--ds-border);
+        background: var(--ds-panel);
+        cursor: grab;
+        position: relative;
+        overflow: visible;
+        transition: border-color 0.25s, transform 0.25s, box-shadow 0.25s, background 0.25s;
+        user-select: none;
+    }
+
+    .task-row:active {
+        cursor: grabbing;
+    }
+
+    .task-row::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        transition: width 0.25s;
+    }
+
+    .task-row.pri-high::before {
+        background: var(--ds-high);
+    }
+
+    .task-row.pri-med::before {
+        background: var(--ds-med);
+    }
+
+    .task-row.pri-low::before {
+        background: var(--ds-low);
+    }
+
+    .task-row.hovered {
+        border-color: var(--ds-silver);
+        background: #141c24;
+        transform: translateY(-2px) translateX(1px);
+        box-shadow: 3px 4px 0 #0a0c0f, 0 0 0 1px rgba(184, 200, 216, 0.15), inset 0 1px 0 rgba(216, 232, 240, 0.07);
+        z-index: 2;
+    }
+
+    .task-row.hovered::before {
+        width: 3px;
+    }
+
+    .task-row.hovered .task-name {
+        color: var(--ds-silver2);
+    }
+
+    .task-row.hovered .silver-sheen {
+        opacity: 1;
+    }
+
+    .silver-sheen {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        width: 3px;
+        opacity: 0;
+        transition: opacity 0.25s;
+    }
+
+    .pri-high .silver-sheen {
+        background: linear-gradient(180deg, rgba(200, 64, 64, 0.6), rgba(184, 200, 216, 0.4), rgba(200, 64, 64, 0.3));
+    }
+
+    .pri-med .silver-sheen {
+        background: linear-gradient(180deg, rgba(200, 134, 10, 0.6), rgba(184, 200, 216, 0.4), rgba(200, 134, 10, 0.3));
+    }
+
+    .pri-low .silver-sheen {
+        background: linear-gradient(180deg, rgba(42, 122, 74, 0.6), rgba(184, 200, 216, 0.4), rgba(42, 122, 74, 0.3));
+    }
+
+    .task-row.done {
+        opacity: 0.45;
+    }
+
+    .task-row.done .task-name {
+        text-decoration: line-through;
+    }
+
+    .task-row.dragging {
+        opacity: 0.4;
+        border-style: dashed;
+        transform: none;
+        box-shadow: none;
+    }
+
+    .task-row.drag-over {
+        border-top: 2px solid var(--ds-accent2);
+    }
+
+    .task-check {
+        width: 14px;
+        height: 14px;
+        border: 1px solid var(--ds-border);
+        background: none;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: all 0.15s;
+        flex-shrink: 0;
+        margin-top: 3px;
+    }
+
+    .task-check.checked {
+        border-color: var(--ds-accent);
+        background: rgba(200, 134, 10, 0.2);
+    }
+
+    .check-mark {
+        width: 6px;
+        height: 6px;
+        background: var(--ds-accent);
+        display: none;
+    }
+
+    .task-check.checked .check-mark {
+        display: block;
+    }
+
+    .task-content {
+        overflow: hidden;
+        min-width: 0;
+    }
+
+    .task-name {
+        font-size: 16px;
+        color: var(--ds-text-bright);
+        letter-spacing: 0.5px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: color 0.25s;
+    }
+
+    .task-notes-wrap {
+        margin-top: 2px;
+    }
+
+    .task-notes {
+        font-size: 12px;
+        color: var(--ds-text);
+        letter-spacing: 0.5px;
+    }
+
+    .task-notes.clamped {
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+    }
+
+    .show-more-btn {
+        font-size: 10px;
+        color: var(--ds-accent);
+        background: none;
+        border: none;
+        font-family: var(--ds-mono);
+        cursor: pointer;
+        padding: 0;
+        letter-spacing: 1px;
+        margin-top: 2px;
+        display: block;
+    }
+
+    .show-more-btn:hover {
+        color: var(--ds-accent2);
+    }
+
+    .task-game-label {
+        font-size: 10px;
+        color: var(--ds-text-dim);
+        letter-spacing: 1px;
+        margin-top: 1px;
+    }
+
+    .pri-badge {
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        text-transform: uppercase;
+        padding: 2px 6px;
+        border: 1px solid;
+        white-space: nowrap;
+    }
+
+    .pri-badge.high {
+        color: #e87070;
+        border-color: var(--ds-high);
+    }
+
+    .pri-badge.med {
+        color: var(--ds-accent2);
+        border-color: var(--ds-med);
+    }
+
+    .pri-badge.low {
+        color: #5ab878;
+        border-color: var(--ds-low);
+    }
+
+    /* Category Badge Styling */
+    .cat-badge {
+        font-size: 11px;
+        letter-spacing: 1px;
+        color: var(--ds-text-dim);
+        padding: 2px 6px;
+        border: 1px solid var(--ds-border);
+        white-space: nowrap;
+        text-transform: uppercase;
+        opacity: 0.8;
+    }
+
+    .del-btn {
+        background: none;
+        border: none;
+        color: var(--ds-text-dim);
+        font-size: 12px;
+        cursor: pointer;
+        font-family: var(--ds-mono);
+        padding: 0 2px;
+        line-height: 1;
+        transition: color 0.15s;
+    }
+
+    .del-btn:hover {
+        color: var(--ds-high);
+    }
+
+    .inline-edit-btn {
+        position: absolute;
+        background: rgba(15, 19, 24, 0.95);
+        border: 1px solid var(--ds-accent);
+        color: var(--ds-accent2);
+        font-family: var(--ds-mono);
+        font-size: 9px;
+        letter-spacing: 2px;
+        padding: 4px 10px;
+        cursor: pointer;
+        text-transform: uppercase;
+        z-index: 50;
+        transition: background 0.15s;
+        white-space: nowrap;
+    }
+
+    .inline-edit-btn:hover {
+        background: rgba(200, 134, 10, 0.2);
+    }
+
+    .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.75);
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+    }
+
+    .modal-overlay.open {
+        display: flex;
+    }
+
+    .modal {
+        background: var(--ds-panel);
+        border: 1px solid var(--ds-accent);
+        padding: 20px;
+        width: 380px;
+        max-width: 94vw;
+        position: relative;
+    }
+
+    .modal-title {
+        font-size: 10px;
+        letter-spacing: 3px;
+        color: var(--ds-accent2);
+        text-transform: uppercase;
+        margin-bottom: 16px;
+        padding-bottom: 8px;
+        border-bottom: 1px solid var(--ds-border);
+    }
+
+    .field {
+        margin-bottom: 12px;
+    }
+
+    .field label {
+        font-size: 9px;
+        letter-spacing: 2px;
+        color: var(--ds-text);
+        display: block;
+        margin-bottom: 4px;
+        text-transform: uppercase;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+        width: 100%;
+        background: var(--ds-bg);
+        border: 1px solid var(--ds-border);
+        color: var(--ds-text-bright);
+        font-family: var(--ds-mono);
+        font-size: 11px;
+        padding: 6px 8px;
+        outline: none;
+        transition: border-color 0.15s;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+        border-color: var(--ds-accent);
+    }
+
+    .field select option {
+        background: var(--ds-panel);
+    }
+
+    .field textarea {
+        resize: vertical;
+        min-height: 60px;
+    }
+
+    .modal-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        margin-top: 16px;
+    }
+
+    .btn-cancel {
+        background: none;
+        border: 1px solid var(--ds-border);
+        color: var(--ds-text);
+        font-family: var(--ds-mono);
+        font-size: 9px;
+        letter-spacing: 2px;
+        padding: 6px 14px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.15s;
+    }
+
+    .btn-cancel:hover {
+        border-color: var(--ds-text-bright);
+        color: var(--ds-text-bright);
+    }
+
+    .btn-confirm {
+        background: rgba(200, 134, 10, 0.15);
+        border: 1px solid var(--ds-accent);
+        color: var(--ds-accent2);
+        font-family: var(--ds-mono);
+        font-size: 9px;
+        letter-spacing: 2px;
+        padding: 6px 14px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.15s;
+    }
+
+    .btn-confirm:hover {
+        background: rgba(200, 134, 10, 0.28);
+    }
+
+    .confirm-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.6);
+        align-items: center;
+        justify-content: center;
+        z-index: 200;
+    }
+
+    .confirm-overlay.open {
+        display: flex;
+    }
+
+    .confirm-box {
+        background: var(--ds-panel);
+        border: 1px solid var(--ds-high);
+        padding: 20px;
+        width: 300px;
+        max-width: 90vw;
+    }
+
+    .confirm-title {
+        font-size: 10px;
+        letter-spacing: 2px;
+        color: #e87070;
+        text-transform: uppercase;
+        margin-bottom: 10px;
+    }
+
+    .confirm-msg {
+        font-size: 11px;
+        color: var(--ds-text);
+        margin-bottom: 16px;
+        line-height: 1.6;
+    }
+
+    .confirm-actions {
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+    }
+
+    .btn-danger {
+        background: rgba(200, 64, 64, 0.15);
+        border: 1px solid var(--ds-high);
+        color: #e87070;
+        font-family: var(--ds-mono);
+        font-size: 9px;
+        letter-spacing: 2px;
+        padding: 6px 14px;
+        cursor: pointer;
+        text-transform: uppercase;
+        transition: all 0.15s;
+    }
+
+    .btn-danger:hover {
+        background: rgba(200, 64, 64, 0.3);
+    }
+
+    .empty-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+        gap: 10px;
+    }
+
+    .empty-icon {
+        font-size: 22px;
+        opacity: 0.4;
+        color: var(--ds-text-dim);
+    }
+
+    .empty-text {
+        font-size: 9px;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        color: var(--ds-text-dim);
+    }
+
+    .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 16px;
+        border-top: 1px solid var(--ds-border);
+        background: var(--ds-panel);
+    }
+
+    .footer-left {
+        font-size: 8px;
+        letter-spacing: 2px;
+        color: var(--ds-text);
+    }
+
+    .progress-bar-wrap {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    .progress-bar {
+        width: 80px;
+        height: 3px;
+        background: var(--ds-border);
+    }
+
+    .progress-fill {
+        height: 100%;
+        background: var(--ds-accent);
+        transition: width 0.3s;
+    }
+
+    .progress-label {
+        font-size: 8px;
+        color: var(--ds-text);
+        letter-spacing: 1px;
+    }
+
+    .scan-line {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(90deg, transparent, rgba(200, 134, 10, 0.15), transparent);
+        pointer-events: none;
+        animation: scan 4s linear infinite;
+        top: 0;
+    }
+
+    @keyframes scan {
+        0% {
+            top: 0%;
+            opacity: 0
+        }
+
+        10% {
+            opacity: 1
+        }
+
+        90% {
+            opacity: 1
+        }
+
+        100% {
+            top: 100%;
+            opacity: 0
+        }
+    }
+
+    .wrapper {
+        position: relative;
+        background: var(--ds-bg);
+        overflow: hidden;
+        border: 1px solid var(--ds-border);
+    }
+
+    .corner {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+    }
+
+    .corner.tl {
+        top: 0;
+        left: 0;
+        border-top: 1px solid var(--ds-accent);
+        border-left: 1px solid var(--ds-accent);
+    }
+
+    .corner.tr {
+        top: 0;
+        right: 0;
+        border-top: 1px solid var(--ds-accent);
+        border-right: 1px solid var(--ds-accent);
+    }
+
+    .corner.bl {
+        bottom: 0;
+        left: 0;
+        border-bottom: 1px solid var(--ds-accent);
+        border-left: 1px solid var(--ds-accent);
+    }
+
+    .corner.br {
+        bottom: 0;
+        right: 0;
+        border-bottom: 1px solid var(--ds-accent);
+        border-right: 1px solid var(--ds-accent);
+    }
+</style>
+
+<div class="wrapper" id="app">
+    <div class="scan-line"></div>
+    <div class="corner tl"></div>
+    <div class="corner tr"></div>
+    <div class="corner bl"></div>
+    <div class="corner br"></div>
+
+    <div class="header">
+        <div class="header-left">
+            <div class="logo-mark">
+                <div class="logo-inner"></div>
+            </div>
+            <div class="title-group">
+                <div class="title-main">Order Management</div>
+                <div class="title-sub">BRIDGES TERMINAL v2.4 // ACTIVE SESSION</div>
+            </div>
+        </div>
+        <div class="header-right">
+            <div class="stat-pill">ACTIVE <span id="active-count">0</span></div>
+            <div class="stat-pill">DONE <span id="done-count">0</span></div>
+            <button class="add-btn" onclick="openModal(null)">+ New Order</button>
+        </div>
+    </div>
+
+    <div class="tab-bar">
+        <button class="tab active" onclick="setTab('all',this)">All Orders</button>
+        <button class="tab" onclick="setTab('high',this)">Priority</button>
+        <button class="tab" onclick="setTab('active',this)">Active</button>
+        <button class="tab" onclick="setTab('done',this)">Completed</button>
+    </div>
+
+    <div class="filter-bar" id="filter-bar"></div>
+
+    <div class="body" id="task-list"></div>
+
+    <div class="footer">
+        <div class="footer-left" id="footer-text">STANDING BY</div>
+        <div class="progress-bar-wrap">
+            <div class="progress-bar">
+                <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+            </div>
+            <div class="progress-label" id="prog-label">0%</div>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="modal">
+    <div class="modal">
+        <div class="modal-title" id="modal-title">// Register New Order</div>
+        <div class="field"><label>Order Name</label><input type="text" id="f-name"
+                placeholder="e.g. Gather ceramics x200" /></div>
+        <div class="field"><label>Game</label><select id="f-game"></select></div>
+        <div class="field">
+            <label>Priority Level</label>
+            <select id="f-pri">
+                <option value="high">High — Critical path</option>
+                <option value="med" selected>Med — Should do soon</option>
+                <option value="low">Low — When possible</option>
+            </select>
+        </div>
+        <div class="field">
+            <label>Category</label>
+            <select id="f-cat">
+                <option>Resources</option>
+                <option>Side mission</option>
+                <option>Exploration</option>
+                <option>Upgrade/Items/Weapons</option>
+                <option>Story</option>
+                <option>Other</option>
+            </select>
+        </div>
+        <div class="field"><label>Notes</label><textarea id="f-notes"
+                placeholder="e.g. Need for zipline network upgrade..."></textarea></div>
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeModal()">Cancel</button>
+            <button class="btn-confirm" id="modal-confirm-btn" onclick="submitTask()">Confirm Order</button>
+        </div>
+    </div>
+</div>
+
+<div class="modal-overlay" id="game-modal">
+    <div class="modal">
+        <div class="modal-title">// Add New Game</div>
+        <div class="field"><label>Game Name</label><input type="text" id="g-name" placeholder="e.g. Hollow Knight" />
+        </div>
+        <div class="modal-actions">
+            <button class="btn-cancel" onclick="closeGameModal()">Cancel</button>
+            <button class="btn-confirm" onclick="confirmAddGame()">Add Game</button>
+        </div>
+    </div>
+</div>
+
+<div class="confirm-overlay" id="confirm-overlay">
+    <div class="confirm-box">
+        <div class="confirm-title">// Confirm Deletion</div>
+        <div class="confirm-msg" id="confirm-msg"></div>
+        <div class="confirm-actions">
+            <button class="btn-cancel" onclick="closeConfirm()">Cancel</button>
+            <button class="btn-danger" id="confirm-yes-btn">Confirm</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    const BUILTIN_GAMES = ['All', 'Other'];
+    const DEFAULT_GAMES = ['Death Stranding 2', 'Resident Evil 2'];
+
+    const SEED = [
+        { id: 1, name: "Gather ceramics ×200", game: "Death Stranding 2", pri: "high", cat: "Resources", notes: "Needed for zipline upgrade in central region.", done: false, order: 0 },
+        { id: 2, name: "Raise order rating on Episode 3 deliveries", game: "Death Stranding 2", pri: "med", cat: "Side mission", notes: "5-star rating unlocks the power skeleton", done: false, order: 1 },
+        { id: 3, name: "Complete Mama relocation order", game: "Death Stranding 2", pri: "high", cat: "Story", notes: "", done: false, order: 2 },
+        { id: 4, name: "Upgrade speed skeleton to Lv.2", game: "Death Stranding 2", pri: "low", cat: "Upgrade/Items/Weapons", notes: "Requires special alloys", done: false, order: 3 },
+        { id: 5, name: "Reach Mountaintop area — memory stone", game: "Resident Evil 2", pri: "med", cat: "Exploration", notes: "Use waygate at consecrated snowfield", done: true, order: 4 },
+    ];
+
+    let tasks = JSON.parse(localStorage.getItem('ds_tasks_v3') || 'null') || SEED;
+    let games = JSON.parse(localStorage.getItem('ds_games_v3') || 'null') || [...DEFAULT_GAMES];
+    let nextId = Math.max(...tasks.map(t => t.id), 0) + 1;
+    let currentTab = 'all';
+    let currentFilter = 'all';
+    let editingId = null;
+    let hoverTimers = {};
+    let dragSrcId = null;
+    let dragSrcGroup = null;
+    let confirmCallback = null;
+
+    function save() {
+        try {
+            localStorage.setItem('ds_tasks_v3', JSON.stringify(tasks));
+            localStorage.setItem('ds_games_v3', JSON.stringify(games));
+        } catch (e) { }
+    }
+
+    function escHtml(s) {
+        return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    function setTab(tab, el) {
+        currentTab = tab;
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        el.classList.add('active');
+        render();
+    }
+
+    function setFilter(f) {
+        currentFilter = f;
+        renderFilterBar();
+        render();
+    }
+
+    function renderFilterBar() {
+        const bar = document.getElementById('filter-bar');
+        let html = '';
+        html += `<button class="filter-chip${currentFilter === 'all' ? ' active' : ''}" onclick="setFilter('all')"><span class="chip-text">All</span></button>`;
+        games.forEach(g => {
+            const isActive = currentFilter === g;
+            html += `<button class="filter-chip removable${isActive ? ' active' : ''}" onclick="setFilter('${escHtml(g)}')" data-game="${escHtml(g)}">
+        <span class="chip-text">${escHtml(g)}</span>
+        <span class="chip-del" onclick="event.stopPropagation();tryRemoveGame('${escHtml(g)}')">×</span>
+      </button>`;
+        });
+        html += `<button class="filter-chip${currentFilter === 'Other' ? ' active' : ''}" onclick="setFilter('Other')"><span class="chip-text">Other</span></button>`;
+        html += `<button class="add-game-btn" onclick="openGameModal()">+ Game</button>`;
+        bar.innerHTML = html;
+    }
+
+    function openGameModal() {
+        document.getElementById('g-name').value = '';
+        document.getElementById('game-modal').classList.add('open');
+        setTimeout(() => document.getElementById('g-name').focus(), 50);
+    }
+    function closeGameModal() { document.getElementById('game-modal').classList.remove('open'); }
+
+    function confirmAddGame() {
+        const name = document.getElementById('g-name').value.trim();
+        if (!name) { document.getElementById('g-name').style.borderColor = '#c84040'; return; }
+        if (games.includes(name) || name === 'Other' || name === 'All') {
+            document.getElementById('g-name').style.borderColor = '#c84040'; return;
+        }
+        games.push(name);
+        save();
+        closeGameModal();
+        renderFilterBar();
+        refreshGameSelect();
+    }
+
+    function tryRemoveGame(g) {
+        const count = tasks.filter(t => t.game === g).length;
+        const msg = count > 0
+            ? `Remove "${g}" from game list? ${count} task(s) assigned to this game will be reassigned to "Other".`
+            : `Remove "${g}" from game list?`;
+        openConfirm(msg, () => {
+            tasks = tasks.map(t => t.game === g ? { ...t, game: 'Other' } : t);
+            games = games.filter(x => x !== g);
+            if (currentFilter === g) currentFilter = 'all';
+            save();
+            renderFilterBar();
+            refreshGameSelect();
+            render();
+        });
+    }
+
+    function openConfirm(msg, cb) {
+        document.getElementById('confirm-msg').textContent = msg;
+        confirmCallback = cb;
+        document.getElementById('confirm-overlay').classList.add('open');
+        document.getElementById('confirm-yes-btn').onclick = () => { confirmCallback && confirmCallback(); closeConfirm(); };
+    }
+    function closeConfirm() { document.getElementById('confirm-overlay').classList.remove('open'); confirmCallback = null; }
+
+    function refreshGameSelect() {
+        const sel = document.getElementById('f-game');
+        const cur = sel.value;
+        sel.innerHTML = games.map(g => `<option value="${escHtml(g)}">${escHtml(g)}</option>`).join('') + '<option value="Other">Other</option>';
+        if ([...sel.options].some(o => o.value === cur)) sel.value = cur;
+    }
+
+    function openModal(taskId) {
+        editingId = taskId;
+        const isEdit = taskId !== null;
+        document.getElementById('modal-title').textContent = isEdit ? '// Edit Order' : '// Register New Order';
+        document.getElementById('modal-confirm-btn').textContent = isEdit ? 'Save Changes' : 'Confirm Order';
+        refreshGameSelect();
+        if (isEdit) {
+            const t = tasks.find(x => x.id === taskId);
+            document.getElementById('f-name').value = t.name;
+            document.getElementById('f-game').value = t.game;
+            document.getElementById('f-pri').value = t.pri;
+            document.getElementById('f-cat').value = t.cat;
+            document.getElementById('f-notes').value = t.notes;
+        } else {
+            document.getElementById('f-name').value = '';
+            document.getElementById('f-notes').value = '';
+            document.getElementById('f-pri').value = 'med';
+        }
+        removeInlineEdit();
+        document.getElementById('modal').classList.add('open');
+        setTimeout(() => document.getElementById('f-name').focus(), 50);
+    }
+
+    function closeModal() {
+        document.getElementById('modal').classList.remove('open');
+        editingId = null;
+    }
+
+    function submitTask() {
+        const name = document.getElementById('f-name').value.trim();
+        if (!name) { document.getElementById('f-name').style.borderColor = '#c84040'; return; }
+        document.getElementById('f-name').style.borderColor = '';
+        if (editingId !== null) {
+            const t = tasks.find(x => x.id === editingId);
+            if (t) {
+                t.name = name;
+                t.game = document.getElementById('f-game').value;
+                t.pri = document.getElementById('f-pri').value;
+                t.cat = document.getElementById('f-cat').value;
+                t.notes = document.getElementById('f-notes').value.trim();
+            }
+        } else {
+            const maxOrder = tasks.length ? Math.max(...tasks.map(t => t.order || 0)) + 1 : 0;
+            tasks.unshift({ id: nextId++, name, game: document.getElementById('f-game').value, pri: document.getElementById('f-pri').value, cat: document.getElementById('f-cat').value, notes: document.getElementById('f-notes').value.trim(), done: false, order: maxOrder });
+        }
+        save(); render(); closeModal();
+    }
+
+    function toggleDone(id, e) {
+        e.stopPropagation();
+        const t = tasks.find(t => t.id === id);
+        if (t) { t.done = !t.done; save(); render(); }
+    }
+
+    function deleteTask(id, e) {
+        e.stopPropagation();
+        openConfirm('Delete this order permanently?', () => {
+            tasks = tasks.filter(t => t.id !== id);
+            save(); render();
+        });
+    }
+
+    function toggleNotes(id) {
+        const el = document.getElementById('notes-' + id);
+        const btn = document.getElementById('notebtn-' + id);
+        if (!el) return;
+        if (el.classList.contains('clamped')) {
+            el.classList.remove('clamped');
+            btn.textContent = '[ show less ]';
+        } else {
+            el.classList.add('clamped');
+            btn.textContent = '[ show more ]';
+        }
+    }
+
+    let inlineEditEl = null;
+    function removeInlineEdit() {
+        if (inlineEditEl) { inlineEditEl.remove(); inlineEditEl = null; }
+    }
+
+    function showInlineEdit(id, rowEl, e) {
+        e.stopPropagation();
+        removeInlineEdit();
+        const btn = document.createElement('button');
+        btn.className = 'inline-edit-btn';
+        btn.textContent = '// EDIT ORDER';
+        btn.onclick = (ev) => { ev.stopPropagation(); openModal(id); };
+        const rect = rowEl.getBoundingClientRect();
+        const wrapRect = document.getElementById('app').getBoundingClientRect();
+        btn.style.top = (rect.bottom - wrapRect.top - 1) + 'px';
+        btn.style.left = (e.clientX - wrapRect.left - 60) + 'px';
+        document.getElementById('app').appendChild(btn);
+        inlineEditEl = btn;
+        const hideOnOut = (ev) => {
+            if (!rowEl.contains(ev.target) && !btn.contains(ev.target)) {
+                removeInlineEdit();
+                document.removeEventListener('click', hideOnOut);
+            }
+        };
+        setTimeout(() => document.addEventListener('click', hideOnOut), 10);
+    }
+
+    function startDrag(id, group, e) {
+        dragSrcId = id;
+        dragSrcGroup = group;
+        const row = document.getElementById('row-' + id);
+        if (row) setTimeout(() => row.classList.add('dragging'), 0);
+    }
+
+    function onDragOver(id, group, e) {
+        if (group !== dragSrcGroup) return;
+        e.preventDefault();
+        document.querySelectorAll('.task-row').forEach(r => r.classList.remove('drag-over'));
+        const row = document.getElementById('row-' + id);
+        if (row && id !== dragSrcId) row.classList.add('drag-over');
+    }
+
+    function onDrop(id, group, e) {
+        e.preventDefault();
+        document.querySelectorAll('.task-row').forEach(r => { r.classList.remove('drag-over'); r.classList.remove('dragging'); });
+        if (!dragSrcId || id === dragSrcId || group !== dragSrcGroup) { dragSrcId = null; return; }
+        const srcIdx = tasks.findIndex(t => t.id === dragSrcId);
+        const dstIdx = tasks.findIndex(t => t.id === id);
+        if (srcIdx < 0 || dstIdx < 0) { dragSrcId = null; return; }
+        const [moved] = tasks.splice(srcIdx, 1);
+        tasks.splice(dstIdx, 0, moved);
+        tasks.forEach((t, i) => t.order = i);
+        dragSrcId = null; dragSrcGroup = null;
+        save(); render();
+    }
+
+    function onDragEnd(e) {
+        document.querySelectorAll('.task-row').forEach(r => { r.classList.remove('drag-over'); r.classList.remove('dragging'); });
+        dragSrcId = null; dragSrcGroup = null;
+    }
+
+    function attachHover(id) {
+        const row = document.getElementById('row-' + id);
+        if (!row) return;
+        row.addEventListener('mouseenter', () => {
+            hoverTimers[id] = setTimeout(() => row.classList.add('hovered'), 200);
+        });
+        row.addEventListener('mouseleave', () => {
+            clearTimeout(hoverTimers[id]);
+            row.classList.remove('hovered');
+        });
+    }
+
+    function render() {
+        let visible = tasks;
+        if (currentFilter !== 'all') visible = visible.filter(t => t.game === currentFilter);
+        if (currentTab === 'high') visible = visible.filter(t => t.pri === 'high' && !t.done);
+        if (currentTab === 'active') visible = visible.filter(t => !t.done);
+        if (currentTab === 'done') visible = visible.filter(t => t.done);
+
+        const allActive = tasks.filter(t => !t.done).length;
+        const allDone = tasks.filter(t => t.done).length;
+        const total = tasks.length;
+        const pct = total ? Math.round((allDone / total) * 100) : 0;
+        document.getElementById('active-count').textContent = allActive;
+        document.getElementById('done-count').textContent = allDone;
+        document.getElementById('prog-fill').style.width = pct + '%';
+        document.getElementById('prog-label').textContent = pct + '%';
+        document.getElementById('footer-text').textContent = total ? `${allDone}/${total} ORDERS RESOLVED` : 'NO ACTIVE ORDERS';
+
+        const list = document.getElementById('task-list');
+        removeInlineEdit();
+
+        if (!visible.length) {
+            list.innerHTML = '<div class="empty-state"><div class="empty-icon">[ ]</div><div class="empty-text">No orders registered</div></div>';
+            return;
+        }
+
+        const groupMap = { 'HIGH PRIORITY': [], 'STANDARD': [], 'DEFERRED': [], 'COMPLETED': [] };
+        visible.forEach(t => {
+            const g = t.done ? 'COMPLETED' : t.pri === 'high' ? 'HIGH PRIORITY' : t.pri === 'med' ? 'STANDARD' : 'DEFERRED';
+            groupMap[g].push(t);
+        });
+
+        let html = '';
+        Object.entries(groupMap).forEach(([g, items]) => {
+            if (!items.length) return;
+            html += `<div class="section-label">${g}</div>`;
+            items.forEach(t => {
+                const hasLongNotes = t.notes && t.notes.length > 80;
+                const noteHtml = t.notes
+                    ? `<div id="notes-${t.id}" class="task-notes${hasLongNotes ? ' clamped' : ''}">${escHtml(t.notes)}</div>
+             ${hasLongNotes ? `<button class="show-more-btn" id="notebtn-${t.id}" onclick="event.stopPropagation();toggleNotes(${t.id})">[ show more ]</button>` : ''}`
+                    : '';
+                html += `
+        <div class="task-row pri-${t.pri}${t.done ? ' done' : ''}" id="row-${t.id}"
+          draggable="true"
+          ondragstart="startDrag(${t.id},'${g}',event)"
+          ondragover="onDragOver(${t.id},'${g}',event)"
+          ondrop="onDrop(${t.id},'${g}',event)"
+          ondragend="onDragEnd(event)"
+          onclick="showInlineEdit(${t.id},this,event)">
+          <div class="silver-sheen"></div>
+          <div class="task-check${t.done ? ' checked' : ''}" onclick="toggleDone(${t.id},event)"><div class="check-mark"></div></div>
+          <div class="task-content">
+            <div class="task-name">${escHtml(t.name)}</div>
+            <div class="task-game-label">${escHtml(t.game)}</div>
+            ${noteHtml}
+          </div>
+          <div class="cat-badge">${escHtml(t.cat)}</div>
+          <div class="pri-badge ${t.pri}">${t.pri.toUpperCase()}</div>
+          <button class="del-btn" onclick="deleteTask(${t.id},event)">×</button>
+        </div>`;
+            });
+        });
+
+        list.innerHTML = html;
+        visible.forEach(t => attachHover(t.id));
+    }
+
+    document.getElementById('modal').addEventListener('click', function (e) { if (e.target === this) closeModal(); });
+    document.getElementById('game-modal').addEventListener('click', function (e) { if (e.target === this) closeGameModal(); });
+    document.getElementById('confirm-overlay').addEventListener('click', function (e) { if (e.target === this) closeConfirm(); });
+    document.addEventListener('click', (e) => {
+        if (inlineEditEl && !inlineEditEl.contains(e.target) && !e.target.closest('.task-row')) removeInlineEdit();
+    });
+
+    renderFilterBar();
+    render();
+</script>
