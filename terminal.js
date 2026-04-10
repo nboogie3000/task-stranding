@@ -14,37 +14,37 @@ const CONFIG = {
   // JSONBin.io config — create a free bin at https://jsonbin.io
   // Set these to persist data across devices/browsers
   JSONBIN_BIN_ID: null,   // e.g. '6650f1abc123456789'
-  JSONBIN_KEY:    null,   // e.g. '$2a$10$...'
+  JSONBIN_KEY: null,   // e.g. '$2a$10$...'
 
-  LS_KEY_TASKS:  'bt_tasks_v4',
-  LS_KEY_GAMES:  'bt_games_v4',
-  NOTES_CLAMP:   80,      // chars before "show more" kicks in
-  HOVER_DELAY:   200,     // ms before hovered style applies
+  LS_KEY_TASKS: 'bt_tasks_v4',
+  LS_KEY_GAMES: 'bt_games_v4',
+  NOTES_CLAMP: 80,      // chars before "show more" kicks in
+  HOVER_DELAY: 200,     // ms before hovered style applies
 };
 
 /* ── Default seed data ──────────────────────────────────────── */
 const DEFAULT_GAMES = ['Death Stranding 2', 'Resident Evil 2'];
 
 const SEED_TASKS = [
-  { id: 1, name: 'Gather ceramics ×200',                    game: 'Death Stranding 2', pri: 'high', cat: 'Resources',              notes: 'Needed for zipline upgrade in central region.',         done: false, order: 0 },
-  { id: 2, name: 'Raise order rating on Episode 3 deliveries', game: 'Death Stranding 2', pri: 'med',  cat: 'Side mission',            notes: '5-star rating unlocks the power skeleton.',             done: false, order: 1 },
-  { id: 3, name: 'Complete Mama relocation order',           game: 'Death Stranding 2', pri: 'high', cat: 'Story',                   notes: '',                                                       done: false, order: 2 },
-  { id: 4, name: 'Upgrade speed skeleton to Lv.2',           game: 'Death Stranding 2', pri: 'low',  cat: 'Upgrade/Items/Weapons',   notes: 'Requires special alloys.',                               done: false, order: 3 },
-  { id: 5, name: 'Reach Mountaintop area — memory stone',    game: 'Resident Evil 2',   pri: 'med',  cat: 'Exploration',             notes: 'Use waygate at consecrated snowfield.',                  done: true,  order: 4 },
+  { id: 1, name: 'Gather ceramics ×200', game: 'Death Stranding 2', pri: 'high', cat: 'Resources', notes: 'Needed for zipline upgrade in central region.', done: false, order: 0 },
+  { id: 2, name: 'Raise order rating on Episode 3 deliveries', game: 'Death Stranding 2', pri: 'med', cat: 'Side mission', notes: '5-star rating unlocks the power skeleton.', done: false, order: 1 },
+  { id: 3, name: 'Complete Mama relocation order', game: 'Death Stranding 2', pri: 'high', cat: 'Story', notes: '', done: false, order: 2 },
+  { id: 4, name: 'Upgrade speed skeleton to Lv.2', game: 'Death Stranding 2', pri: 'low', cat: 'Upgrade/Items/Weapons', notes: 'Requires special alloys.', done: false, order: 3 },
+  { id: 5, name: 'Reach Mountaintop area — memory stone', game: 'Resident Evil 2', pri: 'med', cat: 'Exploration', notes: 'Use waygate at consecrated snowfield.', done: true, order: 4 },
 ];
 
 /* ── State ──────────────────────────────────────────────────── */
-let tasks          = [];
-let games          = [];
-let nextId         = 1;
-let currentTab     = 'all';
-let currentFilter  = 'all';
-let editingId      = null;
-let confirmCb      = null;
-let inlineEditEl   = null;
-let dragSrcId      = null;
-let dragSrcGroup   = null;
-const hoverTimers  = {};
+let tasks = [];
+let games = [];
+let nextId = 1;
+let currentTab = 'all';
+let currentFilter = 'all';
+let editingId = null;
+let confirmCb = null;
+let inlineEditEl = null;
+let dragSrcId = null;
+let dragSrcGroup = null;
+const hoverTimers = {};
 
 /* ── Persistence: JSONBin ───────────────────────────────────── */
 const JSONBIN_BASE = 'https://api.jsonbin.io/v3/b';
@@ -153,7 +153,7 @@ function renderFilterBar() {
   const bar = el('filter-bar');
   const chip = (label, filter, removable = false) => {
     const active = currentFilter === filter ? ' active' : '';
-    const rem    = removable ? ' removable' : '';
+    const rem = removable ? ' removable' : '';
     const delBtn = removable
       ? `<span class="chip-del" onclick="event.stopPropagation();tryRemoveGame('${esc(filter)}')">×</span>`
       : '';
@@ -193,13 +193,13 @@ function confirmAddGame() {
 
 function tryRemoveGame(g) {
   const count = tasks.filter(t => t.game === g).length;
-  const msg   = count > 0
+  const msg = count > 0
     ? `Remove "${g}"? ${count} task(s) will be reassigned to "Other".`
     : `Remove "${g}" from the game list?`;
 
   openConfirm(msg, () => {
-    tasks  = tasks.map(t => t.game === g ? { ...t, game: 'Other' } : t);
-    games  = games.filter(x => x !== g);
+    tasks = tasks.map(t => t.game === g ? { ...t, game: 'Other' } : t);
+    games = games.filter(x => x !== g);
     if (currentFilter === g) currentFilter = 'all';
     save();
     renderFilterBar();
@@ -221,22 +221,22 @@ function openModal(taskId) {
   editingId = taskId;
   const isEdit = taskId !== null;
 
-  el('modal-title').textContent      = isEdit ? '// Edit Order'    : '// Register New Order';
-  el('modal-confirm-btn').textContent = isEdit ? 'Save Changes'     : 'Confirm Order';
+  el('modal-title').textContent = isEdit ? '// Edit Order' : '// Register New Order';
+  el('modal-confirm-btn').textContent = isEdit ? 'Save Changes' : 'Confirm Order';
 
   refreshGameSelect();
 
   if (isEdit) {
     const t = tasks.find(x => x.id === taskId);
-    el('f-name').value  = t.name;
-    el('f-game').value  = t.game;
-    el('f-pri').value   = t.pri;
-    el('f-cat').value   = t.cat;
+    el('f-name').value = t.name;
+    el('f-game').value = t.game;
+    el('f-pri').value = t.pri;
+    el('f-cat').value = t.cat;
     el('f-notes').value = t.notes;
   } else {
-    el('f-name').value  = '';
+    el('f-name').value = '';
     el('f-notes').value = '';
-    el('f-pri').value   = 'med';
+    el('f-pri').value = 'med';
   }
 
   el('f-name').style.borderColor = '';
@@ -259,21 +259,21 @@ function submitTask() {
     const t = tasks.find(x => x.id === editingId);
     if (t) Object.assign(t, {
       name,
-      game:  el('f-game').value,
-      pri:   el('f-pri').value,
-      cat:   el('f-cat').value,
+      game: el('f-game').value,
+      pri: el('f-pri').value,
+      cat: el('f-cat').value,
       notes: el('f-notes').value.trim(),
     });
   } else {
     const maxOrder = tasks.length ? Math.max(...tasks.map(t => t.order || 0)) + 1 : 0;
     tasks.unshift({
-      id:    nextId++,
+      id: nextId++,
       name,
-      game:  el('f-game').value,
-      pri:   el('f-pri').value,
-      cat:   el('f-cat').value,
+      game: el('f-game').value,
+      pri: el('f-pri').value,
+      cat: el('f-cat').value,
       notes: el('f-notes').value.trim(),
-      done:  false,
+      done: false,
       order: maxOrder,
     });
   }
@@ -300,7 +300,7 @@ function deleteTask(id, e) {
 
 function toggleNotes(id) {
   const noteEl = el('notes-' + id);
-  const btnEl  = el('notebtn-' + id);
+  const btnEl = el('notebtn-' + id);
   if (!noteEl) return;
   const clamped = noteEl.classList.toggle('clamped');
   btnEl.textContent = clamped ? '[ show more ]' : '[ show less ]';
@@ -315,14 +315,14 @@ function showInlineEdit(id, rowEl, e) {
   e.stopPropagation();
   removeInlineEdit();
 
-  const btn       = document.createElement('button');
-  btn.className   = 'inline-edit-btn';
+  const btn = document.createElement('button');
+  btn.className = 'inline-edit-btn';
   btn.textContent = '// EDIT ORDER';
-  btn.onclick     = ev => { ev.stopPropagation(); openModal(id); };
+  btn.onclick = ev => { ev.stopPropagation(); openModal(id); };
 
-  const rowRect  = rowEl.getBoundingClientRect();
-  const appRect  = el('app').getBoundingClientRect();
-  btn.style.top  = (rowRect.bottom - appRect.top - 1) + 'px';
+  const rowRect = rowEl.getBoundingClientRect();
+  const appRect = el('app').getBoundingClientRect();
+  btn.style.top = (rowRect.bottom - appRect.top - 1) + 'px';
   btn.style.left = Math.max(4, e.clientX - appRect.left - 60) + 'px';
 
   el('app').appendChild(btn);
@@ -339,7 +339,7 @@ function showInlineEdit(id, rowEl, e) {
 
 /* ── Drag & Drop (within group only) ───────────────────────── */
 function startDrag(id, group, e) {
-  dragSrcId    = id;
+  dragSrcId = id;
   dragSrcGroup = group;
   setTimeout(() => el('row-' + id)?.classList.add('dragging'), 0);
 }
@@ -414,8 +414,8 @@ function closeConfirm() {
 /* ── Render ─────────────────────────────────────────────────── */
 const GROUP_NAMES = {
   high: 'HIGH PRIORITY',
-  med:  'STANDARD',
-  low:  'DEFERRED',
+  med: 'STANDARD',
+  low: 'LOW PRIORITY',
   done: 'COMPLETED',
 };
 
@@ -423,21 +423,21 @@ function render() {
   // Apply tab + game filter
   let visible = tasks;
   if (currentFilter !== 'all') visible = visible.filter(t => t.game === currentFilter);
-  if (currentTab === 'high')   visible = visible.filter(t => t.pri === 'high' && !t.done);
+  if (currentTab === 'high') visible = visible.filter(t => t.pri === 'high' && !t.done);
   else if (currentTab === 'active') visible = visible.filter(t => !t.done);
-  else if (currentTab === 'done')   visible = visible.filter(t => t.done);
+  else if (currentTab === 'done') visible = visible.filter(t => t.done);
 
   // Update header stats
-  const totalAll  = tasks.length;
-  const doneAll   = tasks.filter(t => t.done).length;
+  const totalAll = tasks.length;
+  const doneAll = tasks.filter(t => t.done).length;
   const activeAll = totalAll - doneAll;
-  const pct       = totalAll ? Math.round((doneAll / totalAll) * 100) : 0;
+  const pct = totalAll ? Math.round((doneAll / totalAll) * 100) : 0;
 
   el('active-count').textContent = activeAll;
-  el('done-count').textContent   = doneAll;
-  el('prog-fill').style.width    = pct + '%';
-  el('prog-label').textContent   = pct + '%';
-  el('footer-text').textContent  = totalAll
+  el('done-count').textContent = doneAll;
+  el('prog-fill').style.width = pct + '%';
+  el('prog-label').textContent = pct + '%';
+  el('footer-text').textContent = totalAll
     ? `${doneAll}/${totalAll} ORDERS RESOLVED`
     : 'NO ACTIVE ORDERS';
 
@@ -450,12 +450,12 @@ function render() {
   }
 
   // Group tasks
-  const groups = { 'HIGH PRIORITY': [], 'STANDARD': [], 'DEFERRED': [], 'COMPLETED': [] };
+  const groups = { 'HIGH PRIORITY': [], 'STANDARD': [], 'LOW PRIORITY': [], 'COMPLETED': [] };
   visible.forEach(t => {
     const g = t.done ? 'COMPLETED'
       : t.pri === 'high' ? 'HIGH PRIORITY'
-      : t.pri === 'med'  ? 'STANDARD'
-      : 'DEFERRED';
+        : t.pri === 'med' ? 'STANDARD'
+          : 'LOW PRIORITY';
     groups[g].push(t);
   });
 
@@ -502,8 +502,8 @@ function render() {
 /* ── Event Listeners ────────────────────────────────────────── */
 document.addEventListener('DOMContentLoaded', () => {
   // Close modals on backdrop click
-  el('modal').addEventListener('click',         e => { if (e.target === el('modal'))         closeModal(); });
-  el('game-modal').addEventListener('click',    e => { if (e.target === el('game-modal'))    closeGameModal(); });
+  el('modal').addEventListener('click', e => { if (e.target === el('modal')) closeModal(); });
+  el('game-modal').addEventListener('click', e => { if (e.target === el('game-modal')) closeGameModal(); });
   el('confirm-overlay').addEventListener('click', e => { if (e.target === el('confirm-overlay')) closeConfirm(); });
 
   // Dismiss inline edit on outside click

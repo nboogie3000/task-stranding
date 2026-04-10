@@ -1,22 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="BRIDGES Terminal — Death Stranding-inspired in-game order management overlay">
+  <meta name="description" content="TASK STRANDING — Death Stranding-inspired in-game order management overlay">
   <meta name="theme-color" content="#0a0c0f">
 
   <!-- Security headers (also set in GitHub Pages _headers or server config) -->
   <meta http-equiv="X-Content-Type-Options" content="nosniff">
   <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
 
-  <title>BRIDGES TERMINAL — Order Management</title>
+  <title>TASK TERMINAL — Order Management</title>
   <link rel="stylesheet" href="styles.css">
 
   <!-- Preconnect for font performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 </head>
+
 <body>
 
   <!-- ── Main App Wrapper ───────────────────────────────────── -->
@@ -38,7 +40,7 @@
         </div>
         <div class="title-group">
           <div class="title-main">Order Management</div>
-          <div class="title-sub">BRIDGES TERMINAL v2.4 // ACTIVE SESSION</div>
+          <div class="title-sub">TASK TERMINAL v1.0 // ACTIVE SESSION</div>
         </div>
       </div>
       <div class="header-right">
@@ -50,10 +52,10 @@
 
     <!-- ── View Tabs ────────────────────────────────────────── -->
     <nav class="tab-bar" role="tablist" aria-label="Order views">
-      <button class="tab active" role="tab" aria-selected="true"  onclick="setTab('all',this)">All Orders</button>
-      <button class="tab"        role="tab" aria-selected="false" onclick="setTab('high',this)">Priority</button>
-      <button class="tab"        role="tab" aria-selected="false" onclick="setTab('active',this)">Active</button>
-      <button class="tab"        role="tab" aria-selected="false" onclick="setTab('done',this)">Completed</button>
+      <button class="tab active" role="tab" aria-selected="true" onclick="setTab('all',this)">All Orders</button>
+      <button class="tab" role="tab" aria-selected="false" onclick="setTab('high',this)">Priority</button>
+      <button class="tab" role="tab" aria-selected="false" onclick="setTab('active',this)">Active</button>
+      <button class="tab" role="tab" aria-selected="false" onclick="setTab('done',this)">Completed</button>
     </nav>
 
     <!-- ── Game Filter Bar ──────────────────────────────────── -->
@@ -151,4 +153,5 @@
 
   <script src="terminal.js"></script>
 </body>
+
 </html>
