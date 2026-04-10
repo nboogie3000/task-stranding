@@ -2,7 +2,7 @@
 
 > Death Stranding-inspired in-game order management overlay
 
-A lightweight, holographic task manager designed to float over games as a browser overlay. Tracks quests, side missions, resource goals and more with Scrum-style priority levels.
+A lightweight, holographic task manager designed to float over games as a browser overlay. Tracks quests, side missions, resource goals and more by assigning priority levels and categorizing your tasks.
 
 ---
 
@@ -12,7 +12,6 @@ A lightweight, holographic task manager designed to float over games as a browse
 - **Game management** — add and remove games; filter tasks by game
 - **HUD mode** — hides chrome, leaves only semi-transparent task rows (`Ctrl+H`)
 - **Edit & notes** — click any task to reveal an inline edit button; long notes clamp with "show more"
-- **Holographic UI** — chiral mirror scan lines, silver hover sheen, animated logo pulse
 - **Persistent storage** — localStorage by default; optional JSONBin.io sync for cross-device support
 
 ---
@@ -44,7 +43,11 @@ Data is saved remotely on every change, with localStorage as fallback.
 ---
 
 ## Usage as a Game Overlay
+1. Open `https://yourusername.github.io/bridges-terminal/` from within the In-Game Steam Web Browser, when you hit Shift+Tab
+2. Switch between the 2 different HUD modes in the lower right depending on if you prefer a more minimal UI, or want to see the full HUD
+3. Adjust the window size of the browser to your liking
 
+Alternatively:
 1. Open the GitHub Pages URL in a browser window
 2. Resize the window to a thin panel on one side
 3. On Windows: use **PowerToys** (`Win + Ctrl + T`) to pin "Always on Top"
@@ -80,5 +83,4 @@ Data is saved remotely on every change, with localStorage as fallback.
 
 **Add default games**: edit the `DEFAULT_GAMES` array in `terminal.js`  
 **Change seed tasks**: edit `SEED_TASKS` in `terminal.js` or `data.json`  
-**Adjust note clamp length**: change `NOTES_CLAMP` in the `CONFIG` object  
-**Hover delay**: change `HOVER_DELAY` in `CONFIG` (ms before silver hover effect)
+**Adjust note clamp length**: change `NOTES_CLAMP` in the `CONFIG` object
