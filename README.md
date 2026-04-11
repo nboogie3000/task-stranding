@@ -4,6 +4,8 @@
 
 A lightweight, holographic task manager designed to float over games as a browser overlay. Tracks quests, side missions, resource goals and more by assigning priority levels and categorizing your tasks.
 
+
+Disclaimer: This project is a fan-made utility and is not affiliated with, authorized, or endorsed by Kojima Productions or Sony Interactive Entertainment. All "Death Stranding" related imagery, terminology, and design elements are trademarks of their respective owners. This tool is provided for personal use only.
 ---
 
 ## Features
