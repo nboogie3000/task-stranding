@@ -10,7 +10,7 @@ Disclaimer: This project is a fan-made utility and is not affiliated with, autho
 
 ## Features
 
-- **Priority groups** — High / Standard / Deferred / Completed, colour-coded with drag-to-reorder within each group
+- **Priority groups** — High / Standard / Low / Completed, colour-coded with drag-to-reorder within each group
 - **Game management** — add and remove games; filter tasks by game
 - **HUD mode** — hides chrome, leaves only semi-transparent task rows (`Ctrl+H`)
 - **Edit & notes** — click any task to reveal an inline edit button; long notes clamp with "show more"
